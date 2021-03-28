@@ -1,5 +1,6 @@
 import { Container } from "react-bootstrap";
 import { Redirect, Route, Switch } from "react-router";
+import Navbar from "../../../components/Navbar";
 import Login from './Login'
 import Register from "./Register";
 
@@ -10,6 +11,8 @@ const curr_year = new Date().getFullYear()
 
 const Auth = ({match}) => {
     return (
+        <>
+        <Navbar></Navbar>
         <Container className="position-relative vh-100">
             <div className="auth__card">
                 <div className="auth__form">
@@ -34,6 +37,7 @@ const Auth = ({match}) => {
                 </div>
             </div>
         </Container>
+        </>
     );
 };
 
