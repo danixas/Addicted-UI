@@ -1,13 +1,14 @@
 import { React } from 'react';
-import { Table, Button, Dropdown } from 'react-bootstrap';
+import { Table, Dropdown } from 'react-bootstrap';
 import "./styles.scss"
 
 const BetTable = ({bets}) => {
+    
     const deletebet = () => {
 
     }
-    const editBet = () => {
-
+    const editBet = (bet) => {
+         
     }
     return(
         <div className="table">
@@ -30,14 +31,14 @@ const BetTable = ({bets}) => {
                                 <td>{bet.description}</td>
                                 <td>
                                 <Dropdown>
-                                    <Dropdown.Toggle variant="success" id="dropdown-basic">
+                                    <Dropdown.Toggle variant="secondary" id="dropdown-basic" className="dropdown color">
                                         options
                                     </Dropdown.Toggle>
 
                                     <Dropdown.Menu>
                                         {
-                                            bet.betOptions.map((option) =>(
-                                                <Dropdown.Item >{option.title}</Dropdown.Item>
+                                            bet.betOptions.map((option) => (
+                                                <Dropdown.Item >{option}</Dropdown.Item>
                                             ))
                                         }
                                     </Dropdown.Menu>
@@ -45,6 +46,8 @@ const BetTable = ({bets}) => {
                                 </td>
                                 <td>{bet.dateStart}</td>
                                 <td>{bet.dateEnd}</td>
+                                <td><a href="#" onClick={(bet) => editBet(bet)}>edit</a></td>
+                                
                             </tr>
                         ))
                     }
