@@ -1,8 +1,6 @@
 import { React, useState } from 'react';
 import { Button, Form, Modal } from "react-bootstrap";
 import "./styles.scss";
-
-import Navbar from '../../components/Navbar';
 import BetTable from "./components/betTable";
 
 const Bets = () => {
@@ -36,7 +34,6 @@ const Bets = () => {
     
     return(
         <>
-        <Navbar />
         <div className="center">
             <h1>Active bets</h1>
         </div>

@@ -16,23 +16,30 @@ const Navbar = () => {
         history.push("/bets");
     };
 
+    const onLinkClick = (addedPath) => {
+        history.push(addedPath);
+    };
+
     return(
         <>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <ul class="navbar-nav mr-auto">
+        <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+            <ul className="navbar-nav mr-auto">
                 <li>
-                    <a class="nav-link" href="" onClick={onHomeClick}>Home</a>
+                    <a className="nav-link" href="" onClick={onHomeClick}>Home</a>
                 </li>
                 <li>
-                    <a class="nav-link" href="" onClick={onBetsClick}>Bets</a>
+                    <a className="nav-link" href="" onClick={() => onLinkClick("/users")}>Users</a>
+                </li>
+                <li>
+                    <a className="nav-link" href="" onClick={onBetsClick}>Bets</a>
                 </li>
             </ul>
-            <ul class="navbar-nav ml-auto">
+            <ul className="navbar-nav ml-auto">
                 <li>
-                    <a class="nav-link" href="" onClick={onSignInClick}>Sign in</a>
+                    <a className="nav-link" href="" onClick={onSignInClick}>Sign in</a>
                 </li>
                 <li>
-                    <a class="nav-link" href="" onClick={onSignUpClick}>Sign up</a>
+                    <a className="nav-link" href="" onClick={onSignUpClick}>Sign up</a>
                 </li>
             </ul>
         </nav>

@@ -12,7 +12,6 @@ const curr_year = new Date().getFullYear()
 const Auth = ({match}) => {
     return (
         <>
-        <Navbar></Navbar>
         <Container className="position-relative vh-100">
             <div className="auth__card">
                 <div className="auth__form">
