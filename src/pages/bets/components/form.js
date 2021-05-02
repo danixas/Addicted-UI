@@ -24,7 +24,6 @@ const BetForm = ({ betData, onBetsChange }) => {
         } else {
             result = await addNewBet(bet);
         }
-        console.log(result);
         onBetsChange(result.data);
     };
 
@@ -70,7 +69,7 @@ const BetForm = ({ betData, onBetsChange }) => {
             />
         </Form.Group>
         <Button variant="primary" type="submit" >
-                {betData ? "Update" : "Add" }
+                { betData ? "Update" : "Add" }
         </Button>
     </Form>
     )

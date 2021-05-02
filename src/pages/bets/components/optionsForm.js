@@ -7,7 +7,7 @@ import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
 import CheckIcon from "@material-ui/icons/Check";
 import SearchIcon from "@material-ui/icons/Search";
-import { updateBet } from "../../../api";
+import { updateBet, deleteBetOption } from "../../../api";
 
 
 const OptionsTable = ({bet, refreshBets}) => {
@@ -31,8 +31,8 @@ const OptionsTable = ({bet, refreshBets}) => {
         setOptions(bets.find(b=>b.id===bet.id).betOptions);
     };
 
-    const onRowDelete = async (newData) => {
-        await updateBet(bet.id, {...bet, betOptions: options.filter(o=>o.id!==newData.id)});
+    const onRowDelete = async (data) => {
+        await deleteBetOption(bet.id, data.id);
         const bets = await refreshBets();
         setOptions(bets.find(b=>b.id===bet.id).betOptions);
    };

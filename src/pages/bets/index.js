@@ -51,6 +51,9 @@ const Bets = () => {
         </Modal>
         <div className="center">
             <BetsTable bets={bets} onBetsChange={onBetsChange} refreshBets={refreshBets}/>
+            <Button variant="secondary" onClick={handleShow} block>
+                Add Bet
+            </Button>
         </div>
         
         </>

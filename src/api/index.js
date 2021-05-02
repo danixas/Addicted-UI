@@ -9,6 +9,7 @@ import {
     addNewBet,
     updateBet,
     deleteBet,
+    deleteBetOption,
 } from "./bets";
 
 export {
@@ -18,5 +19,6 @@ export {
     getAllBets,
     addNewBet,
     updateBet,
-    deleteBet
+    deleteBet,
+    deleteBetOption,
 };
