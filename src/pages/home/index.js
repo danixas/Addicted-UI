@@ -10,7 +10,6 @@ const Home = () => {
     return (
         <>
             <Container>
-                <Navbar />
                 <div className="home__page">
                     <FuturedBet title="Vacius neateis į paskaitą" />
                     <Banner
