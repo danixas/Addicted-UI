@@ -130,7 +130,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function BetsTable() {
+export default function BetsTable({onClick}) {
     const classes = useStyles();
     const [order, setOrder] = React.useState("asc");
     const [orderBy, setOrderBy] = React.useState("title");
@@ -183,6 +183,7 @@ export default function BetsTable() {
                                             role="checkbox"
                                             tabIndex={-1}
                                             key={row.title}
+                                            onClick={() => onClick()}
                                         >
                                             <TableCell padding="checkbox"></TableCell>
                                             <TableCell
