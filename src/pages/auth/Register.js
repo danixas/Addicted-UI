@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import { useHistory } from "react-router";
-import axios from "../../../axiosConfig";
+import axios from "../../axiosConfig";
 
 const Register = () => {
     const history = useHistory();

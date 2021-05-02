@@ -1,10 +1,11 @@
 import { React } from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import Navbar from './components/Navbar';
-import Home from "./pages/dashboard";
-import Auth from "./pages/dashboard/auth";
+
 import Bets from "./pages/bets";
 import Users from "./pages/users";
+import Home from "./pages/home";
+import Auth from "./pages/auth";
 
 const App = () => {
     return (

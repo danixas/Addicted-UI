@@ -31,7 +31,7 @@ const UsersTable = ({ users, isLoading, onUsersChange }) => {
         </>        
     );
 
-    return(
+    return (
         <>
             <MaterialTable
                 className="material-table"
