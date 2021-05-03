@@ -3,7 +3,6 @@ import { Form, Button } from 'react-bootstrap';
 import { addNewBet, updateBet } from "../../../api";
 
 const BetForm = ({ betData, onBetsChange }) => {
-    console.log(betData)
     const [bet, setBet] = useState(betData ? betData : {
        title: "",
        description: "",

@@ -4,6 +4,7 @@ import "./styles.scss";
 import BetsTable from "./components/table";
 import BetForm from './components/form';
 import { getAllBets } from "../../api";
+import MainContainer from '../../components/MainContainer';
 
 const Bets = () => {
     const [bets, setBets] = useState([]);
@@ -32,30 +33,26 @@ const Bets = () => {
 
     return(
         <>
-        <div className="center">
-            <h1>Active bets</h1>
-        </div>
-        
-        <Modal show={show} onHide={handleShow}>
-            <Modal.Header closeButton>
-                <Modal.Title>Create a new bet</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-               <BetForm onBetsChange={onBetsChange}/>
-            </Modal.Body>
-            <Modal.Footer>
-                <Button variant="secondary" onClick={handleShow}>
-                    Close
-                </Button>
-            </Modal.Footer>
-        </Modal>
-        <div className="center">
+            <h2>Active bets</h2>
+            <hr />
             <BetsTable bets={bets} onBetsChange={onBetsChange} refreshBets={refreshBets}/>
             <Button variant="secondary" onClick={handleShow} block>
                 Add Bet
-            </Button>
-        </div>
-        
+            </Button>   
+            <Modal show={show} onHide={handleShow}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Create a new bet</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                <BetForm onBetsChange={onBetsChange}/>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={handleShow}>
+                        Close
+                    </Button>
+                </Modal.Footer>
+            </Modal>
+  
         </>
     );
 };

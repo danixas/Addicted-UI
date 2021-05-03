@@ -78,7 +78,6 @@ const BetsTable = ({bets, onBetsChange, refreshBets}) => {
                     { title: "Options count", field: "options_count" },
                     { title: "", field: "action", cellStyle: { textAlign: "right" }}
                 ]}
-                title="Bets"
                 isLoading={false}
                 data={bets ? bets.map(u => ({
                     ...u, 
