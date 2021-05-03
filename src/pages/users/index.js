@@ -25,7 +25,7 @@ class Users extends Component {
     onUsersChange = (user) => {
         const {users} = this.state;
         this.setState({
-            users: users.map(u => u.id == user.id ? user : u).concat(users.find(u => u.id == user.id) ? [] : [user]),
+            users: users.map(u => u.id === user.id ? user : u).concat(users.find(u => u.id === user.id) ? [] : [user]),
         });
     };
 

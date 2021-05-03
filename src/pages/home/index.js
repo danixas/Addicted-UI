@@ -1,6 +1,5 @@
 import { React } from "react";
 import { Container } from "react-bootstrap";
-import Navbar from "../../components/Navbar";
 import Banner from "./components/banner";
 import BetsTable from "./components/betsTable";
 import FuturedBet from "./components/futuredBet";
