@@ -11,7 +11,7 @@ const NavigationBar = () => {
                 menu
             </span>
             <Navbar.Brand href="/">
-                <img src={"img/logo.png"} width="100px" height="50px" alt="Logo" />
+                <img src={"img/logos.png"} width="100px" height="50px" alt="Logo" />
             </Navbar.Brand>
             <Nav className="ml-auto right-nav right-icons">
                 <li className="nav-item nav-icon">
