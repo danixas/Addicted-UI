@@ -2,7 +2,7 @@ import { React, useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import { addUser, editUser } from "../../../api";
 
-const UserForm = ({ userData, onUsersChange }) => {
+const UserForm = ({ userData, onUsersChange, toggleModal }) => {
     const [user, setUser] = useState(userData ? userData : {
         userName: "",
         name: "",
@@ -24,7 +24,8 @@ const UserForm = ({ userData, onUsersChange }) => {
         } else {
             result = await addUser(user);
         }
-    
+        
+        toggleModal();
         onUsersChange(result.data);
     };
 

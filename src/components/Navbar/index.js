@@ -15,12 +15,12 @@ const NavigationBar = () => {
             </Navbar.Brand>
             <Nav className="ml-auto right-nav right-icons">
                 <li className="nav-item nav-icon">
-                    <NavLink exact to={"/"}>
+                    <NavLink exact to={"/users/profile"}>
                         <span className="material-icons">account_circle</span>
                     </NavLink>
                 </li>
                 <li className="nav-item nav-icon">
-                    <NavLink exact to={"/"}>
+                    <NavLink exact to={"/auth/login"}>
                         <span className="material-icons">exit_to_app</span>
                     </NavLink>
                 </li>

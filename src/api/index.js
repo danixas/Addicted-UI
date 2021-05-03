@@ -1,7 +1,8 @@
 import { 
     getUsers,
     addUser,
-    editUser
+    editUser,
+    getProfile,
 } from "./users";
 
 import {
@@ -16,6 +17,7 @@ export {
     getUsers,
     addUser,
     editUser,
+    getProfile,
     getAllBets,
     addNewBet,
     updateBet,

@@ -52,6 +52,7 @@ const UsersTable = ({ users, isLoading, onUsersChange }) => {
                     <UserForm 
                         userData={selectedUser}
                         onUsersChange={onUsersChange}
+                        toggleModal={toggleFormStatus}
                     />
                 </Modal.Body>
             </Modal>

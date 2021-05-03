@@ -83,7 +83,7 @@ const BetsTable = ({bets, onBetsChange, refreshBets}) => {
                     ...u, 
                     dateStart: u.dateStart.split("T")[0], 
                     dateEnd: u.dateStart.split("T")[0], 
-                    options_count: u.betOptions.length,
+                    options_count: u?.betOptions?.length ?? 0,
                     action: actions(u),
                 })) : []}         
             />
@@ -95,6 +95,7 @@ const BetsTable = ({bets, onBetsChange, refreshBets}) => {
                     <BetForm 
                         betData={selectedBet}
                         onBetsChange={onBetsChange}
+                        toggleOpen={toggleFormStatus}
                     />
                 </Modal.Body>
             </Modal>

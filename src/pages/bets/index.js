@@ -34,17 +34,17 @@ const Bets = () => {
     return(
         <>
             <h2>Active bets</h2>
-            <hr />
-            <BetsTable bets={bets} onBetsChange={onBetsChange} refreshBets={refreshBets}/>
-            <Button variant="secondary" onClick={handleShow} block>
+            <Button variant="info" onClick={handleShow}>
                 Add Bet
-            </Button>   
+            </Button> 
+            <hr />
+            <BetsTable bets={bets} onBetsChange={onBetsChange} refreshBets={refreshBets}/>  
             <Modal show={show} onHide={handleShow}>
                 <Modal.Header closeButton>
                     <Modal.Title>Create a new bet</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                <BetForm onBetsChange={onBetsChange}/>
+                <BetForm onBetsChange={onBetsChange} toggleOpen={handleShow}/>
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={handleShow}>

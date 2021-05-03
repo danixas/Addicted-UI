@@ -53,6 +53,7 @@ class Users extends Component {
                     <Modal.Body>
                         <UserForm 
                             onUsersChange={this.onUsersChange}
+                            toggleModal={this.toggleFormStatus}
                         />
                     </Modal.Body>
                 </Modal>
