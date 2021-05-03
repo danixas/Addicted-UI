@@ -1,46 +1,48 @@
-img {
-    margin-left: 0px;
-    max-width:10%;
-    height:auto;
-    padding-left: 10px;
-}
+.profile__page {
+    img {
+        margin-left: 0px;
+        max-width: 10%;
+        height: auto;
+        padding-left: 10px;
+    }
 
-.footer {
-    position: fixed;
-    margin-bottom: 50px;
-    bottom: 0;
-    margin-top: 18px;
-}
+    .footer {
+        position: fixed;
+        margin-bottom: 50px;
+        bottom: 0;
+        margin-top: 18px;
+    }
 
-.name {
-    padding-bottom: 50px;
-    padding-left: 15px;
-    font-size: 4rem;
-    font-weight: bold;
-}
-.card {
-    margin: 5px;
-    padding-bottom: 100px;
-    border-radius: 25px;
-}
+    .name {
+        padding-bottom: 50px;
+        padding-left: 15px;
+        font-size: 4rem;
+        font-weight: bold;
+    }
+    .card {
+        margin: 5px;
+        padding-bottom: 100px;
+        border-radius: 25px;
+    }
 
-.card-title {
-    font-size: 3rem;
-}
+    .card-title {
+        font-size: 3rem;
+    }
 
-.card-text {
-    font-size: 2rem;
-}
+    .card-text {
+        font-size: 2rem;
+    }
 
-.flex {
-    display: flex;
-    flex-wrap: nowrap;
-}
+    .flex {
+        display: flex;
+        flex-wrap: nowrap;
+    }
 
-.flex-child {
-    flex: 1;
-}
+    .flex-child {
+        flex: 1;
+    }
 
-.right {
-    text-align: right;
+    .right {
+        text-align: right;
+    }
 }

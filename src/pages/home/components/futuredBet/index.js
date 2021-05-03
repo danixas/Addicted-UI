@@ -1,16 +1,16 @@
 import { React } from "react";
 import { Badge, Button } from "react-bootstrap";
-import { IoIosHelpCircleOutline, IoMdThumbsUp, IoMdThumbsDown } from "react-icons/io";
+import { IoIosHelpCircleOutline, IoMdArrowDown, IoMdArrowUp } from "react-icons/io";
 import { FaHeart } from "react-icons/fa";
 import "./styles.scss";
 
-const FuturedBet = ({ title }) => {
+const FuturedBet = ({ title, ...props }) => {
     return (
-        <div className="popular_bet__card">
+        <div {...props} className="popular_bet__card">
             <div className="header">
                 <Badge>&#8226; Popular</Badge>
                 <div className="date">
-                    21 Apr in <span className>19:00</span>
+                    21 Apr in <span>19:00</span>
                 </div>
                 <IoIosHelpCircleOutline size={24}></IoIosHelpCircleOutline>
             </div>
@@ -30,14 +30,14 @@ const FuturedBet = ({ title }) => {
 
                 <div className="bet__btn mr-2">
                     <Button variant="warning">
-                        <IoMdThumbsUp color="white" className="thumbs_up__icon"/>
+                        <IoMdArrowUp color="white" style={{marginBottom: 3}}/>
                         1.35
                     </Button>
                 </div>
 
                 <div className="bet__btn">
                     <Button variant="warning">
-                        <IoMdThumbsDown color="white"/>
+                        <IoMdArrowDown color="white" style={{marginBottom: 2}}/>
                         3.05
                     </Button>
                 </div>

@@ -11,7 +11,7 @@ const Bets = () => {
     const [show, setShow] = useState(false);
     const handleShow = () => setShow(!show);
 
-    
+
     const refreshBets = async () => {
         const result = await getAllBets();
         setBets(result.data);
@@ -32,13 +32,13 @@ const Bets = () => {
     };
 
     return(
-        <>
+        <div className="create_bets">
             <h2>Active bets</h2>
             <Button variant="info" onClick={handleShow}>
                 Add Bet
-            </Button> 
+            </Button>
             <hr />
-            <BetsTable bets={bets} onBetsChange={onBetsChange} refreshBets={refreshBets}/>  
+            <BetsTable bets={bets} onBetsChange={onBetsChange} refreshBets={refreshBets}/>
             <Modal show={show} onHide={handleShow}>
                 <Modal.Header closeButton>
                     <Modal.Title>Create a new bet</Modal.Title>
@@ -52,8 +52,8 @@ const Bets = () => {
                     </Button>
                 </Modal.Footer>
             </Modal>
-  
-        </>
+
+        </div>
     );
 };
 

@@ -1,41 +1,42 @@
-.center {
-    margin: auto;
-    width: 75%; 
-    text-align: center;
-}
+.create_bets {
+    .center {
+        margin: auto;
+        width: 75%;
+        text-align: center;
+    }
 
-.border {
-    border: 3px solid rgb(175, 9, 180);
-}
+    .border {
+        border: 3px solid rgb(175, 9, 180);
+    }
 
-.table {
-    margin: auto;
-    width: 75%; 
-}
+    .table {
+        margin: auto;
+        width: 75%;
+    }
 
-.color {
-    background-color: rgba(150, 150, 150, 0.233);
-}
+    .color {
+        background-color: rgba(150, 150, 150, 0.233);
+    }
 
+    .card {
+        width: 18rem;
+    }
 
-.card {
-    width: 18rem;
-}
+    .table {
+        margin: auto;
+        width: 100%;
+    }
 
-.table {
-    margin: auto;
-    width: 100%; 
-}
+    .dropdown {
+        margin: auto;
+        width: 100%;
+        background-color: rgba(122, 122, 122, 0.3);
+        border: 0px;
+        padding: 0px;
+        border-radius: 0px;
+    }
 
-.dropdown {
-    margin: auto;
-    width: 100%;
-    background-color: rgba(122, 122, 122, 0.3);
-    border: 0px;
-    padding: 0px;
-    border-radius: 0px;
-}
-
-.dropdown:hover {
-    background-color: rgba(122, 122, 122, 0.5);
+    .dropdown:hover {
+        background-color: rgba(122, 122, 122, 0.5);
+    }
 }
