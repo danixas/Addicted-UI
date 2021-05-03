@@ -14,13 +14,11 @@ const Auth = ({match}) => {
         <Container className="position-relative vh-100">
             <div className="auth__card">
                 <div className="auth__form">
-
-                    <Switch>
-                        <Route exact path={`${match.path}/login`} component={Login}></Route>
-                        <Route exact path={`${match.path}/register`} component={Register}></Route>
-                        <Redirect to={`${match.path}/login`} />
-                    </Switch>
-
+                    {
+                        match.path == "/auth/login" 
+                        ? <Login /> 
+                        : <Register />
+                    }
                     <div className="auth__form_footer">
                         &copy; KTU Addicted {curr_year}
                     </div>

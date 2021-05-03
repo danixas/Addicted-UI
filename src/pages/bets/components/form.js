@@ -2,8 +2,7 @@ import { React, useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import { addNewBet, updateBet } from "../../../api";
 
-const BetForm = ({ betData, onBetsChange }) => {
-    console.log(betData)
+const BetForm = ({ betData, onBetsChange, toggleOpen }) => {
     const [bet, setBet] = useState(betData ? betData : {
        title: "",
        description: "",
@@ -24,6 +23,7 @@ const BetForm = ({ betData, onBetsChange }) => {
         } else {
             result = await addNewBet(bet);
         }
+        toggleOpen();
         onBetsChange(result.data);
     };
 

@@ -78,13 +78,12 @@ const BetsTable = ({bets, onBetsChange, refreshBets}) => {
                     { title: "Options count", field: "options_count" },
                     { title: "", field: "action", cellStyle: { textAlign: "right" }}
                 ]}
-                title="Bets"
                 isLoading={false}
                 data={bets ? bets.map(u => ({
                     ...u, 
                     dateStart: u.dateStart.split("T")[0], 
                     dateEnd: u.dateStart.split("T")[0], 
-                    options_count: u.betOptions.length,
+                    options_count: u?.betOptions?.length ?? 0,
                     action: actions(u),
                 })) : []}         
             />
@@ -96,6 +95,7 @@ const BetsTable = ({bets, onBetsChange, refreshBets}) => {
                     <BetForm 
                         betData={selectedBet}
                         onBetsChange={onBetsChange}
+                        toggleOpen={toggleFormStatus}
                     />
                 </Modal.Body>
             </Modal>

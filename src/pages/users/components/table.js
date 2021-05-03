@@ -41,7 +41,6 @@ const UsersTable = ({ users, isLoading, onUsersChange }) => {
                     { title: "Email", field: "email" },
                     { title: "", field: "action", cellStyle: { textAlign: "right" }}
                 ]}
-                title="Users"
                 isLoading={isLoading}
                 data={users ? users.map(u => ({...u, action: actions(u)})) : []}         
             />
@@ -53,6 +52,7 @@ const UsersTable = ({ users, isLoading, onUsersChange }) => {
                     <UserForm 
                         userData={selectedUser}
                         onUsersChange={onUsersChange}
+                        toggleModal={toggleFormStatus}
                     />
                 </Modal.Body>
             </Modal>

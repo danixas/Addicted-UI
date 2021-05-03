@@ -5,6 +5,8 @@ import MainContainer from "../../components/MainContainer";
 import UsersTable from "./components/table";
 import UserForm from "./components/form";
 import {getUsers} from "../../api";
+import "./style.css";
+
 class Users extends Component {
     state = {
         isOpen: false,
@@ -33,10 +35,12 @@ class Users extends Component {
         const { isOpen, users } = this.state;
 
         return (
-            <MainContainer>
-                <Button onClick={this.toggleFormStatus}>
+            <>
+                <h2>Users</h2>
+                <Button onClick={this.toggleFormStatus} className="right-button">
                     Add User
                 </Button>
+                <hr/>
                 <UsersTable 
                     users={users}
                     isLoading={users === null}
@@ -49,10 +53,11 @@ class Users extends Component {
                     <Modal.Body>
                         <UserForm 
                             onUsersChange={this.onUsersChange}
+                            toggleModal={this.toggleFormStatus}
                         />
                     </Modal.Body>
                 </Modal>
-            </MainContainer>
+            </>
         )
 
     }

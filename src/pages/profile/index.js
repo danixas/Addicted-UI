@@ -33,7 +33,6 @@ const Profile = () => {
     get();
     return (
         <> 
-        <Container>
             <div className="name">
                 {user.name} {user.surname}
             </div>
@@ -73,9 +72,7 @@ const Profile = () => {
                 title="Win over 1000 Makackas coin by betting today!"
                 description="Predict the future! Bet starting today and become rich by winning both Makackas and Vacius coins."
                 className="container footer"
-            />
-        </Container>
-     
+            /> 
         </>
     );
 };
