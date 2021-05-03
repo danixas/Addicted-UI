@@ -1,0 +1,9 @@
+@media (min-width: 1200px) {
+    div.container, div.container-lg, div.container-md, div.container-sm, div.container-xl {
+        max-width: 70%;
+    }
+}
+
+.full-width {
+    width: 100%;
+}

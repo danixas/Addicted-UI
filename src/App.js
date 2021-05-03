@@ -1,16 +1,14 @@
-import { React } from "react";
+import { React, useState } from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
-
-import Home from "./pages/home";
 import Auth from "./pages/auth";
-import Bets from "./pages/bets";
+import Root from "./Root";
 
 const App = () => {
     return (
         <Router>
-            <Route exact path="/" component={Home}></Route>
-            <Route path="/auth" component={Auth}></Route>
-            <Route exact path="/bets" component={Bets}></Route>
+            <Route exact path="/auth/login" component={Auth} />
+            <Route exact path="/auth/register" component={Auth} />
+            <Route component={Root} />
         </Router>
     );
 };

@@ -1,6 +1,5 @@
 import { React, useState } from "react";
 import { Container } from "react-bootstrap";
-import Navbar from "../../components/Navbar";
 import ActiveBets from "./components/activeBets";
 import Banner from "./components/banner";
 import BetForm from "./components/betForm";
@@ -13,27 +12,24 @@ const Home = () => {
 
     const displayBetForm = () => {
         setShow(!show);
-    }
+    };
 
-    const onFormSubmit = async(e) => {
+    const onFormSubmit = async (e) => {
         e.preventDefault();
     };
     return (
         <>
-            <Container>
-                <Navbar />
-                <BetForm show={show} onHide={displayBetForm} onSubmit={onFormSubmit}/>
-                <div className="home__page">
-                    <FuturedBet title="Vacius neateis į paskaitą" onClick={displayBetForm} />
-                    <Banner
-                        title="Win over 1000 Makackas coin by betting today!"
-                        description="Predict the future! Bet starting today and become rich by winning both Makackas and Vacius coins."
-                        className="banner"
-                    />
-                    <ActiveBets />
-                    <BetsTable onClick={displayBetForm}/>
-                </div>
-            </Container>
+            <BetForm show={show} onHide={displayBetForm} onSubmit={onFormSubmit} />
+            <div className="home__page">
+                <FuturedBet title="Vacius neateis į paskaitą" onClick={displayBetForm} />
+                <Banner
+                    title="Win over 1000 Makackas coin by betting today!"
+                    description="Predict the future! Bet starting today and become rich by winning both Makackas and Vacius coins."
+                    className="banner"
+                />
+                <ActiveBets />
+                <BetsTable onClick={displayBetForm} />
+            </div>
         </>
     );
 };

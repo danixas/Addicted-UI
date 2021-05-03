@@ -1,114 +1,59 @@
-import { React, useState } from 'react';
-import { Button, Form, Modal } from "react-bootstrap";
+import { React, useState, useEffect } from 'react';
+import { Button, Modal } from "react-bootstrap";
 import "./styles.scss";
-
-import Navbar from '../../components/Navbar';
-import BetTable from "./components/betTable";
+import BetsTable from "./components/table";
+import BetForm from './components/form';
+import { getAllBets } from "../../api";
+import MainContainer from '../../components/MainContainer';
 
 const Bets = () => {
     const [bets, setBets] = useState([]);
-    const [betOptions, setBetOptions] = useState([]);
     const [show, setShow] = useState(false);
     const handleShow = () => setShow(!show);
-    const [bet, setBet] = useState({});
 
-    const onFormSubmit = async(e) => {
-        e.preventDefault();
-        setBets([
-            ...bets,
-            bet
-        ]);
-        handleShow();
+
+    const refreshBets = async () => {
+        const result = await getAllBets();
+        setBets(result.data);
+        return result.data;
     };
 
-    const updateBet = (e) => {
-        const {name, value} = e.target;
-        let newValue = value;
-        if(name === "betOptions")
-        {
-            newValue = [...betOptions, ...value.split("|")]
-        }
-        setBet({
-            ...bet,
-            [name]: newValue,
-        });
+
+    useEffect(()=> {
+        refreshBets();
+    }, [])
+
+    const onBetsChange = (bet) => {
+        setBets(
+            bets
+                .map(b => b.id === bet.id ? bet : b)
+                .concat(bets.find(b=>b.id===bet.id) ? [] : [bet])
+        );
     };
-    
+
     return(
-        <>
-        <Navbar />
-        <div className="center">
-            <h1>Active bets</h1>
-        </div>
-        
-        <Modal show={show} onHide={handleShow}>
-            <Modal.Header closeButton>
-                <Modal.Title>Create a new bet</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-                <Form onSubmit={onFormSubmit}>
-                    <Form.Group>
-                        <Form.Control
-                            name="title"
-                            placeholder="Enter bet title"
-                            onChange={updateBet}
-                            required
-                        />
-                    </Form.Group>
-                    <Form.Group>
-                        <Form.Control
-                            type="textarea"
-                            name="description"
-                            placeholder="Enter bet description"
-                            onChange={updateBet}
-                            required
-                        />
-                    </Form.Group>
-                    <Form.Group>
-                        <Form.Control
-                            name="betOptions"
-                            placeholder="betting options: option1|option2|option3|..."
-                            onChange={updateBet}
-                            required
-                        />
-                    </Form.Group>
-                    <Form.Group>
-                        <Form.Control
-                            type="datetime-local"
-                            name="dateStart"
-                            placeholder="Choose start date"
-                            onChange={updateBet}
-                            required
-                        />
-                    </Form.Group>
-                    <Form.Group>
-                        <Form.Control
-                            type="datetime-local"
-                            name="dateEnd"
-                            placeholder="Choose end date"
-                            onChange={updateBet}
-                            required
-                        />
-                    </Form.Group>
-                </Form>
-            </Modal.Body>
-            <Modal.Footer>
-                <Button variant="secondary" onClick={handleShow}>
-                    Close
-                </Button>
-                <Button variant="primary" type="submit" onClick={onFormSubmit}>
-                    Save Changes
-                </Button>
-            </Modal.Footer>
-        </Modal>
-        <div className="center">
-            <BetTable bets={bets}/>
-            <Button variant="secondary" onClick={handleShow} block>
+        <div className="create_bets">
+            <h2>Active bets</h2>
+            <Button variant="info" onClick={handleShow}>
                 Add Bet
             </Button>
+            <hr />
+            <BetsTable bets={bets} onBetsChange={onBetsChange} refreshBets={refreshBets}/>
+            <Modal show={show} onHide={handleShow}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Create a new bet</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                <BetForm onBetsChange={onBetsChange} toggleOpen={handleShow}/>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={handleShow}>
+                        Close
+                    </Button>
+                </Modal.Footer>
+            </Modal>
+
         </div>
-        
-        </>
     );
 };
 

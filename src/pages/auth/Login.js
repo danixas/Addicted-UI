@@ -12,9 +12,8 @@ const Login = () => {
         e.preventDefault();
         try {
             setErrors({})
-
-            const req = await axios.post("/authenticate/login", user);
-            const jwt_token = req.data.token;
+            await axios.post("/authenticate/login", user);
+            history.push("");
         } catch (e) {
             setErrors({ ...errors, password: "Invalid password" });
         }
