@@ -13,6 +13,10 @@ import {
     deleteBetOption,
 } from "./bets";
 
+import {
+    getAllRoles,
+} from "./roles";
+
 export {
     getUsers,
     addUser,
@@ -23,4 +27,5 @@ export {
     updateBet,
     deleteBet,
     deleteBetOption,
+    getAllRoles,
 };

@@ -2,7 +2,7 @@ import { React, useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import { addUser, editUser } from "../../../api";
 
-const UserForm = ({ userData, onUsersChange, toggleModal }) => {
+const UserForm = ({ userData, onUsersChange, toggleModal, roles }) => {
     const [user, setUser] = useState(userData ? userData : {
         userName: "",
         name: "",
@@ -67,6 +67,16 @@ const UserForm = ({ userData, onUsersChange, toggleModal }) => {
                     value={user.email}
                     required
                 />
+            </Form.Group>
+            <Form.Group>
+                <Form.Label>Role</Form.Label>
+                <Form.Control as="select" value={user.roleId} onChange={(e) => onChange({target: {name: "roleId", value: e.target.value}})}>
+                    {
+                        roles.map(r => (
+                            <option id={r.id} value={r.id}>{r.name}</option>
+                        ))
+                    }
+                </Form.Control>
             </Form.Group>
             {!userData && (
                 <Form.Group>
