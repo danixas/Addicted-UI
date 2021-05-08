@@ -3,7 +3,7 @@ import { Button, Modal } from "react-bootstrap";
 import MaterialTable from 'material-table'
 import UserForm from "./form";
 
-const UsersTable = ({ users, isLoading, onUsersChange }) => {
+const UsersTable = ({ users, roles, isLoading, onUsersChange }) => {
 
     const [isOpen, setOpen] = useState(false);
     const [selectedUser, setSelectedUser] = useState(null);
@@ -39,10 +39,15 @@ const UsersTable = ({ users, isLoading, onUsersChange }) => {
                     { title: "Name", field: "name" },
                     { title: "Surname", field: "surname" },
                     { title: "Email", field: "email" },
+                    { title: "Role", field: "role_name"},
                     { title: "", field: "action", cellStyle: { textAlign: "right" }}
                 ]}
                 isLoading={isLoading}
-                data={users ? users.map(u => ({...u, action: actions(u)})) : []}         
+                data={users ? users.map(u => ({
+                    ...u, 
+                    action: actions(u),
+                    role_name: roles?.find(r => r.id === u.roleId)?.name ?? "No Role",
+                })) : []}         
             />
             <Modal show={isOpen} onHide={toggleFormStatus}>
                 <Modal.Header closeButton>
@@ -53,6 +58,7 @@ const UsersTable = ({ users, isLoading, onUsersChange }) => {
                         userData={selectedUser}
                         onUsersChange={onUsersChange}
                         toggleModal={toggleFormStatus}
+                        roles={roles}
                     />
                 </Modal.Body>
             </Modal>

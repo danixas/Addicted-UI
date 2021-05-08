@@ -4,19 +4,20 @@ import { Button, Modal } from "react-bootstrap";
 import MainContainer from "../../components/MainContainer";
 import UsersTable from "./components/table";
 import UserForm from "./components/form";
-import {getUsers} from "../../api";
+import {getAllRoles, getUsers} from "../../api";
 import "./style.css";
 
 class Users extends Component {
     state = {
         isOpen: false,
         users: null,
+        roles: null,
     };
 
     componentDidMount = async () => {
         const users = await getUsers();
-
-        this.setState({ users: users.data });
+        const roles = await getAllRoles();
+        this.setState({ users: users.data, roles: roles.data });
     }
 
     toggleFormStatus = () => {
@@ -32,7 +33,11 @@ class Users extends Component {
     };
 
     render() {
-        const { isOpen, users } = this.state;
+        const { 
+            isOpen,
+            users, 
+            roles,
+        } = this.state;
 
         return (
             <>
@@ -43,17 +48,19 @@ class Users extends Component {
                 <hr/>
                 <UsersTable 
                     users={users}
+                    roles={roles}
                     isLoading={users === null}
                     onUsersChange={this.onUsersChange}
                 />
                  <Modal show={isOpen} onHide={this.toggleFormStatus}>
                     <Modal.Header closeButton>
-                        <Modal.Title> Add New User</Modal.Title>
+                        <Modal.Title> Add New User </Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
                         <UserForm 
                             onUsersChange={this.onUsersChange}
                             toggleModal={this.toggleFormStatus}
+                            roles={roles}
                         />
                     </Modal.Body>
                 </Modal>
