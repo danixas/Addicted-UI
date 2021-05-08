@@ -1,4 +1,4 @@
-import { React, useState } from "react";
+import { React, useEffect, useState } from "react";
 import { Container, Row, Col, Card } from "react-bootstrap";
 import axios from "../../axiosConfig";
 import Banner from "../home/components/banner";
@@ -16,9 +16,8 @@ const Profile = () => {
         totalWon: 0,
         totalLoss: 0
     });
-    const get = async () => {
+    const loadUserData = async () => {
         var result = null;
-        console.log("aaaaaaaaaa");
         result = await getProfile();
         setUser(result ? {
             name: result.data.name,
@@ -30,7 +29,10 @@ const Profile = () => {
             totalLoss: 0
         } : user)
     };
-    get();
+
+    useEffect(() => {loadUserData()}, []);
+
+    
     return (
         <div className="profile__page">
             <div className="name">

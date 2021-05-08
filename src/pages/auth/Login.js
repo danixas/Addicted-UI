@@ -12,7 +12,7 @@ const Login = () => {
         e.preventDefault();
         try {
             setErrors({})
-            await axios.post("/authenticate/login", user);
+            await axios.post("/authenticate/login", user, { withCredentials: true });
             history.push("");
         } catch (e) {
             setErrors({ ...errors, password: "Invalid password" });
