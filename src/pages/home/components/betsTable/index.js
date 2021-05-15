@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
@@ -10,28 +10,11 @@ import TablePagination from "@material-ui/core/TablePagination";
 import TableRow from "@material-ui/core/TableRow";
 import TableSortLabel from "@material-ui/core/TableSortLabel";
 import Paper from "@material-ui/core/Paper";
-import { IoMdThumbsUp, IoMdThumbsDown } from "react-icons/io";
 import "./styles.scss";
 
-function createData(title, date, author, _for, against) {
-    return { title, date, author, _for, against };
+function createData(title, date, author) {
+    return { title, date, author };
 }
-
-const rows = [
-    createData("Vacius neateis į paskaitą", "21 Apr, 19:00", "Admin", 1.35, 3.05),
-    createData("Lorem ipsum dolor sit amet", "2 May, 11:00", "Admin", 51, 4.9),
-    createData("consectetur adipiscing elit", "3 May, 14:20", "Admin", 24, 6.0),
-    createData("sed do eiusmod tempor incididunt ut", "4 May, 19:35", "Admin", 24, 4.0),
-    createData("labore et dolore magna aliqua.", "6 May, 8:00", "Admin", 49, 3.9),
-    createData("Ut enim ad minim veniam, quis", "8 May, 14:00", "Admin", 87, 6.5),
-    createData("nostrud exercitation ullamco", "10 May, 14:00", "Admin", 37, 4.3),
-    createData("laboris nisi ut aliquip ex ea", "11 May, 19:00", "Admin", 94, 0.0),
-    createData("commodo consequat. Duis aute", "12 May, 22:00", "Admin", 65, 7.0),
-    createData("irure dolor in reprehenderit", "21 May, 23:00", "Admin", 98, 0.0),
-    createData("in voluptate velit esse cillum", "22 May, 11:00", "Admin", 81, 2.0),
-    createData("dolore eu fugiat nulla pariatur.", "24 May, 7:00", "Admin", 9, 37.0),
-    createData("Excepteur sint occaecat cupidatat", "27 May, 13:00", "Admin", 63, 4.0),
-];
 
 function descendingComparator(a, b, orderBy) {
     if (b[orderBy] < a[orderBy]) {
@@ -68,8 +51,6 @@ const headCells = [
     },
     { id: "date", numeric: false, disablePadding: false, label: "Date" },
     { id: "author", numeric: false, disablePadding: false, label: "Created by" },
-    { id: "_for", numeric: true, disablePadding: false, label: <IoMdThumbsUp size={16} /> },
-    { id: "against", numeric: true, disablePadding: false, label: <IoMdThumbsDown size={16} /> },
 ];
 
 function EnhancedTableHead(props) {
@@ -130,12 +111,17 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function BetsTable({onClick}) {
+export default function BetsTable({onClick, items}) {
     const classes = useStyles();
     const [order, setOrder] = React.useState("asc");
     const [orderBy, setOrderBy] = React.useState("title");
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(5);
+    const [rows, setRows] = useState([]);
+
+    useEffect(() => {
+        setRows(items.map(i => createData(i.title, i.dateStart, i.user.userName)));
+    }, [items]);
 
     const handleRequestSort = (event, property) => {
         const isAsc = orderBy === property && order === "asc";
@@ -183,7 +169,7 @@ export default function BetsTable({onClick}) {
                                             role="checkbox"
                                             tabIndex={-1}
                                             key={row.title}
-                                            onClick={() => onClick()}
+                                            onClick={() => onClick(items.filter(i => i.title === row.title)[0])}
                                         >
                                             <TableCell padding="checkbox"></TableCell>
                                             <TableCell
@@ -196,8 +182,6 @@ export default function BetsTable({onClick}) {
                                             </TableCell>
                                             <TableCell>{row.date}</TableCell>
                                             <TableCell>{row.author}</TableCell>
-                                            <TableCell align="right">{row._for}</TableCell>
-                                            <TableCell align="right">{row.against}</TableCell>
                                         </TableRow>
                                     );
                                 })}

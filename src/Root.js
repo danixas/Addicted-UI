@@ -1,10 +1,9 @@
 import { React, useState } from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Redirect, Route, Switch } from "react-router-dom";
 import Navbar from './components/Navbar';
 
 import Users from "./pages/users";
 import Home from "./pages/home";
-import Auth from "./pages/auth";
 import Sidebar from "./components/Sidebar/Sidebar";
 import MainContainer from "./components/MainContainer";
 import Bets from "./pages/bets";

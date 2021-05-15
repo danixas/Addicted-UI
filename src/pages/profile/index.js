@@ -32,7 +32,7 @@ const Profile = () => {
 
     useEffect(() => {loadUserData()}, []);
 
-    
+
     return (
         <div className="profile__page">
             <div className="name">
