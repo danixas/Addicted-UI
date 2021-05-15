@@ -1,21 +1,10 @@
-import { 
-    getUsers,
-    addUser,
-    editUser,
-    getProfile,
-} from "./users";
+import { getUsers, addUser, editUser, getProfile } from "./users";
 
-import {
-    getAllBets,
-    addNewBet,
-    updateBet,
-    deleteBet,
-    deleteBetOption,
-} from "./bets";
+import { getAllBets, addNewBet, updateBet, deleteBet, deleteBetOption } from "./bets";
 
-import {
-    getAllRoles,
-} from "./roles";
+import { getAllRoles } from "./roles";
+
+import { createOffer, getUserOffers } from "./offers";
 
 export {
     getUsers,
@@ -28,4 +17,6 @@ export {
     deleteBet,
     deleteBetOption,
     getAllRoles,
+    createOffer,
+    getUserOffers
 };
