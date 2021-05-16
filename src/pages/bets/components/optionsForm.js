@@ -7,13 +7,15 @@ import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
 import CheckIcon from "@material-ui/icons/Check";
 import SearchIcon from "@material-ui/icons/Search";
-import { updateBet, deleteBetOption } from "../../../api";
+import { updateBet, deleteBetOption, finishBet } from "../../../api";
+import { Edit } from '@material-ui/icons';
 
 
 const OptionsTable = ({bet, refreshBets}) => {
     const [isOpen, setOpen] = useState(false);
     const [isOptionsOpen, setOptionsOpen] = useState(false);
     const [options, setOptions] = useState(null);
+    const [option, setOption] = useState(null);
 
     useEffect(() => {
         setOptions(bet.betOptions);
@@ -37,6 +39,10 @@ const OptionsTable = ({bet, refreshBets}) => {
         setOptions(bets.find(b=>b.id===bet.id).betOptions);
    };
 
+    const onFinish = async (e, option) => {
+        console.log(option.id);
+        await finishBet(bet.id, option.id);
+    }
     return(
         <>
             <MaterialTable
@@ -54,7 +60,7 @@ const OptionsTable = ({bet, refreshBets}) => {
                     Clear: props => <DeleteIcon />,
                     Check: props => <CheckIcon />,
                     Search: props => <SearchIcon />,
-                    ResetSearch: props => <DeleteIcon />
+                    ResetSearch: props => <DeleteIcon />,
                   }}
                 editable={
                     {
@@ -63,7 +69,14 @@ const OptionsTable = ({bet, refreshBets}) => {
                         onRowDelete: onRowDelete,
                     }
                 }
-        
+                actions={[
+                    {
+                        icon: 'save',
+                        tooltip: 'finish bet',
+                        onClick: (e, option) => onFinish(e, option)
+                    }
+                ]}
+               
             />
         </>
         
