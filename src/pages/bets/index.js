@@ -27,7 +27,7 @@ const Bets = () => {
         setBets(
             bets
                 .map(b => b.id === bet.id ? bet : b)
-                .concat(bets.find(b=>b.id===bet.id) ? [] : [bet])
+                .concat(bets.find(b=>b.id===bet.id) ? [] : [{...bet, betOptions: []}])
         );
     };
 
@@ -38,7 +38,10 @@ const Bets = () => {
                 Add Bet
             </Button>
             <hr />
-            <BetsTable bets={bets} onBetsChange={onBetsChange} refreshBets={refreshBets}/>
+            <BetsTable bets={bets.filter(bet=>!bet.isFinished)} onBetsChange={onBetsChange} refreshBets={refreshBets}/>
+            <hr />
+            <h2>Finished bets</h2>
+            <BetsTable bets={bets.filter(bet=>bet.isFinished)} onBetsChange={onBetsChange} refreshBets={refreshBets}/>
             <Modal show={show} onHide={handleShow}>
                 <Modal.Header closeButton>
                     <Modal.Title>Create a new bet</Modal.Title>

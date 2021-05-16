@@ -13,18 +13,23 @@ const Sidebar = ({ opened }) => {
           </span>
           Home
         </SidebarItem>
-        <SidebarItem url="/users">
-            <span className="material-icons">
-            group_add
-            </span>
-            Users
-        </SidebarItem>
-        <SidebarItem url="/bets">
-            <span className="material-icons">
-            casino
-            </span>
-            Manage Bets
-        </SidebarItem>
+        { localStorage.getItem("role") == "Admin" && (
+          <>
+            <SidebarItem url="/users">
+                <span className="material-icons">
+                group_add
+                </span>
+                Users
+            </SidebarItem>
+            <SidebarItem url="/bets">
+                <span className="material-icons">
+                casino
+                </span>
+                Manage Bets
+            </SidebarItem>
+          </>
+        )
+        }
       </ul>
       <hr />
     </div>

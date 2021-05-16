@@ -20,7 +20,7 @@ const NavigationBar = () => {
                     </NavLink>
                 </li>
                 <li className="nav-item nav-icon">
-                    <NavLink exact to={"/auth/login"}>
+                    <NavLink exact to={"/login"}>
                         <span className="material-icons">exit_to_app</span>
                     </NavLink>
                 </li>

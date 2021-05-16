@@ -1,6 +1,6 @@
 import axios from "../axiosConfig";
 
-const getAllBets = async () => axios.get("/bets", null, { withCredentials: true });
+const getAllBets = async () => axios.get("/bets", null);
 
 const addNewBet = async(betData) => axios.post("/bets", betData);
 

@@ -7,17 +7,20 @@ import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
 import CheckIcon from "@material-ui/icons/Check";
 import SearchIcon from "@material-ui/icons/Search";
-import { updateBet, deleteBetOption, finishBet } from "../../../api";
+import { updateBet, deleteBetOption, finishBet, getBetOffers } from "../../../api";
 import { Edit } from '@material-ui/icons';
 
 
-const OptionsTable = ({bet, refreshBets}) => {
-    const [isOpen, setOpen] = useState(false);
-    const [isOptionsOpen, setOptionsOpen] = useState(false);
+const OptionsTable = ({bet, refreshBets, closeModal}) => {
     const [options, setOptions] = useState(null);
-    const [option, setOption] = useState(null);
+    const [offers, setOffers] = useState(null);
+
 
     useEffect(() => {
+        (async () => {
+            const offers = await getBetOffers(bet.id);
+            setOffers(offers.data);
+        })();
         setOptions(bet.betOptions);
     }, [bet]);
 
@@ -40,20 +43,66 @@ const OptionsTable = ({bet, refreshBets}) => {
    };
 
     const onFinish = async (e, option) => {
-        console.log(option.id);
         await finishBet(bet.id, option.id);
+        await refreshBets();
+        closeModal();
+    };
+
+    const getColumns = () => {
+        const columns = [
+            { title: "Title", field: "title" },
+        ];
+        if (bet.isFinished) {
+            columns.push({ title: "Money in pool", field: "moneySum"});
+        }
+        return columns;
+    };
+    
+    const getRowColor = (row) => {
+        if (!bet.isFinished) {
+            return "";
+        }
+       return row.isWinner ? "#E9FCD4" : "#F44949";
+    };
+
+    const getWinnerList = () => {
+        return Object.values(offers?.reduce((acc, offer) => ({...acc, [offer.user.id]: offer.user}), {}) ?? {});
+    };
+    const renderStatistic = () => {
+        return (
+            <>
+                <hr />
+                <h4>Bet statistics:</h4>
+                <div> Winner bet: 
+                    <strong> {options?.find(o=>o.isWinner)?.title} </strong>
+                </div>
+                <div> Total sum accumilated: 
+                    <strong> {offers?.reduce((acc, offer) => acc + offer.amount, 0)} </strong>
+                    Vacius coin
+                </div>
+                <div> Winners:
+                    <ul>
+                         {getWinnerList().map((user) => (<li> {`${user.name} ${user.surname}`}</li>))}
+                    </ul>
+                </div>
+            </>
+        )
     }
+
     return(
         <>
             <MaterialTable
                 className="material-table"
-                columns={[
-                    { title: "Title", field: "title" },
-                ]}
+                columns={getColumns()}
                 title="Options"
                 isLoading={false}
-                data={options}
-                icons={{
+                data={options?.map((o)=>(
+                    {
+                        ...o, 
+                        moneySum: offers?.reduce((acc, offer) => offer.betOptionId === o.id ? acc + offer.amount : acc, 0),
+                    }))
+                }
+                icons={!bet.isFinished &&  {
                     Add: props => <AddIcon />,
                     Edit: props => <EditIcon />,
                     Delete: props => <DeleteIcon />,
@@ -62,22 +111,27 @@ const OptionsTable = ({bet, refreshBets}) => {
                     Search: props => <SearchIcon />,
                     ResetSearch: props => <DeleteIcon />,
                   }}
-                editable={
+                editable={!bet.isFinished && 
                     {
                         onRowAdd: onRowAdd,
                         onRowUpdate: onRowUpdate,
                         onRowDelete: onRowDelete,
                     }
                 }
-                actions={[
+                actions={!bet.isFinished && [
                     {
-                        icon: 'save',
+                        icon: 'my_location',
                         tooltip: 'finish bet',
                         onClick: (e, option) => onFinish(e, option)
                     }
                 ]}
-               
+                options={{
+                    rowStyle: (rowData) => ({
+                        backgroundColor: getRowColor(rowData),
+                    }),
+                }}   
             />
+            {bet.isFinished && renderStatistic()}
         </>
         
         

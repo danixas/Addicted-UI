@@ -12,7 +12,8 @@ const Login = () => {
         e.preventDefault();
         try {
             setErrors({})
-            await axios.post("authenticate/login", user, { withCredentials: true });
+            const role = await axios.post("authenticate/login", user, { withCredentials: true });
+            localStorage.setItem("role", role.data.roleName);
             history.push("");
         } catch (e) {
             setErrors({ ...errors, password: "Invalid password" });

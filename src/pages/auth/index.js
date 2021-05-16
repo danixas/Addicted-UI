@@ -15,7 +15,7 @@ const Auth = ({match}) => {
             <div className="auth__card">
                 <div className="auth__form">
                     {
-                        match.path == "/auth/login" 
+                        match.path == "/login" 
                         ? <Login /> 
                         : <Register />
                     }

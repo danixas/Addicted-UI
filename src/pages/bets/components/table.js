@@ -2,7 +2,7 @@ import { React, useState } from 'react';
 import MaterialTable from 'material-table';
 import { Button, Modal } from "react-bootstrap";
 import BetForm from './form';
-import OptionsTable from './optionsForm';
+import OptionsTable from './optionsTable';
 import { deleteBet } from "../../../api";
 
 
@@ -56,7 +56,7 @@ const BetsTable = ({bets, onBetsChange, refreshBets}) => {
             </Button>
             <Button
                 type="button"
-                key="optionsButton"
+                key="DeleteBet"
                 className="mx-1"
                 variant="danger"
                 onClick={()=>onDeleteBet(bet)}
@@ -85,7 +85,12 @@ const BetsTable = ({bets, onBetsChange, refreshBets}) => {
                     dateEnd: u.dateStart.split("T")[0], 
                     options_count: u?.betOptions?.length ?? 0,
                     action: actions(u),
-                })) : []}         
+                })) : []}   
+                options={{
+                    rowStyle: (rowData) => ({
+                        backgroundColor: rowData.isFinished ? "#E9FCD4" : "#FFF7CD",
+                    }),
+                }}      
             />
             <Modal show={isOpen} onHide={toggleFormStatus}>
                 <Modal.Header closeButton>
@@ -104,7 +109,7 @@ const BetsTable = ({bets, onBetsChange, refreshBets}) => {
                     <Modal.Title>Options</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <OptionsTable bet={selectedBet} refreshBets={refreshBets}/>
+                   <OptionsTable bet={selectedBet} refreshBets={refreshBets} closeModal={toggleOptionsForm}/>
                 </Modal.Body>
             </Modal>
         </>

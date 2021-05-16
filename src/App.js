@@ -6,8 +6,8 @@ import Root from "./Root";
 const App = () => {
     return (
         <Router>
-            <Route exact path="/auth/login" component={Auth} />
-            <Route exact path="/auth/register" component={Auth} />
+            <Route exact path="/login" component={Auth} />
+            <Route exact path="/register" component={Auth} />
             <Route component={Root} />
         </Router>
     );
