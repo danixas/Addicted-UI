@@ -74,7 +74,7 @@ const UserForm = ({ userData, onUsersChange, toggleModal, roles }) => {
                 <Form.Label>Role</Form.Label>
                 <Form.Control as="select" value={user.roleId} onChange={(e) => onChange({target: {name: "roleId", value: e.target.value}})}>
                     {
-                        roles.map(r => (
+                        roles?.map(r => (
                             <option id={r.id} value={r.id}>{r.name}</option>
                         ))
                     }

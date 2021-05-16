@@ -21,7 +21,7 @@ const BetForm = ({ betData, onBetsChange, toggleOpen }) => {
         let result = null;
         if (betData) {
             result = await updateBet(bet.id, bet);
-            messageHandling("success", "Successfuly updated a bet");
+            messageHandling("success", "Successfuly updated bet");
         } else {
             result = await addNewBet(bet);
             messageHandling("success", "Successfuly added new bet");

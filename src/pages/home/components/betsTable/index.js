@@ -120,7 +120,7 @@ export default function BetsTable({onClick, items}) {
     const [rows, setRows] = useState([]);
 
     useEffect(() => {
-        setRows(items.map(i => createData(i.title, i.dateStart, i.user.userName)));
+        setRows(items.map(i => createData(i?.title, i?.dateStart, i?.user?.userName)));
     }, [items]);
 
     const handleRequestSort = (event, property) => {
@@ -168,7 +168,7 @@ export default function BetsTable({onClick, items}) {
                                             hover
                                             role="checkbox"
                                             tabIndex={-1}
-                                            key={row.title}
+                                            key={row?.title}
                                             onClick={() => onClick(items.filter(i => i.title === row.title)[0])}
                                         >
                                             <TableCell padding="checkbox"></TableCell>
@@ -178,10 +178,10 @@ export default function BetsTable({onClick, items}) {
                                                 scope="row"
                                                 padding="none"
                                             >
-                                                {row.title}
+                                                {row?.title}
                                             </TableCell>
-                                            <TableCell>{row.date?.split("T")[0]}</TableCell>
-                                            <TableCell>{row.author}</TableCell>
+                                            <TableCell>{row?.date?.split("T")[0]}</TableCell>
+                                            <TableCell>{row?.author}</TableCell>
                                         </TableRow>
                                     );
                                 })}

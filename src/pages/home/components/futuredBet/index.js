@@ -15,10 +15,10 @@ const FuturedBet = ({ title, bet, ...props }) => {
                 <IoIosHelpCircleOutline size={24}></IoIosHelpCircleOutline>
             </div>
             <div className="body">
-                <h1>{bet.title}</h1>
-                <div className="info">+{bet.betOptions.length} custom options</div>
+                <h1>{bet?.title}</h1>
+                <div className="info">+{bet?.betOptions?.length} custom options</div>
                 <div className="author">
-                    Created by <span>{bet.user.userName}</span>
+                    Created by <span>{bet?.user?.userName}</span>
                 </div>
             </div>
             <div className="bet_btn__container">
