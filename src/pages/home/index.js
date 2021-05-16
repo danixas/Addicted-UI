@@ -22,6 +22,7 @@ const Home = () => {
 
     const onFormSubmit = async (e, betInfo) => {
         e.preventDefault();
+        console.log(`betinfo on submit:`);
         console.log(betInfo);
         await createOffer(betInfo);
         setShow(!show);
