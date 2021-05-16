@@ -4,6 +4,8 @@ import Banner from "./components/banner";
 import BetForm from "./components/betForm";
 import BetsTable from "./components/betsTable";
 import FuturedBet from "./components/futuredBet";
+import { messageHandling } from '../../utils/messageHandling';
+ 
 import { getAllActiveBets, getProfile, createOffer, getUserOffers } from "../../api";
 import "./styles.scss";
 
@@ -26,6 +28,7 @@ const Home = () => {
         e.preventDefault();
         await createOffer(betInfo);
         setShow(!show);
+        messageHandling("success", "Successfully stolen your money");
     };
 
     useEffect(() => {
