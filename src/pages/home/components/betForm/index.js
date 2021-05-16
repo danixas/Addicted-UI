@@ -7,6 +7,7 @@ const BetForm = ({ show, onHide, onSubmit, bet, balance }) => {
 
     const onBetOptionSelect = (e, i) => {
         e.preventDefault();
+        console.log(`aaaaaaaaaaaaaaaaaaa ${i}`);
         setBetInfo({ ...betInfo, betOptionId: i });
     };
 
@@ -16,7 +17,9 @@ const BetForm = ({ show, onHide, onSubmit, bet, balance }) => {
     };
 
     useEffect(() => {
-        setBetInfo({ id: bet.id, betOptionId: -1, amount: 0 });
+        console.log("useeffect bet");
+        console.log(bet);
+        setBetInfo({ ...betInfo, bet: {id: bet.id}, amount: 0 });
     }, [bet]);
 
     return (
