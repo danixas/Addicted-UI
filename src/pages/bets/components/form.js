@@ -1,6 +1,7 @@
 import { React, useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import { addNewBet, updateBet } from "../../../api";
+import { messageHandling } from '../../../utils/messageHandling';
 
 const BetForm = ({ betData, onBetsChange, toggleOpen }) => {
     const [bet, setBet] = useState(betData ? betData : {
@@ -20,8 +21,10 @@ const BetForm = ({ betData, onBetsChange, toggleOpen }) => {
         let result = null;
         if (betData) {
             result = await updateBet(bet.id, bet);
+            messageHandling("success", "Successfuly updated a bet");
         } else {
             result = await addNewBet(bet);
+            messageHandling("success", "Successfuly added new bet");
         }
         toggleOpen();
         onBetsChange(result.data);

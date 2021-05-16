@@ -7,4 +7,16 @@ const axiosConfig = axios.create({
 
 axiosConfig.defaults.headers.common['Content-Type'] = 'application/json';
 
+
+
+const handleErr = (err) => {
+    if (err instanceof Error) {
+        return {data: err.response.data, isError: true};
+    }
+    return err;
+}
+
+axiosConfig.interceptors.response.use(
+    handleErr, 
+    handleErr);
 export default axiosConfig;

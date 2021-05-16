@@ -16,7 +16,7 @@ const BetForm = ({ show, onHide, onSubmit, bet, balance }) => {
     };
 
     useEffect(() => {
-        setBetInfo({ id: bet.id, betOptionId: 1, amount: 0 });
+        setBetInfo({ id: bet.id, betOptionId: -1, amount: 0 });
     }, [bet]);
 
     return (
@@ -25,15 +25,21 @@ const BetForm = ({ show, onHide, onSubmit, bet, balance }) => {
                 <Modal.Title>Make a bet</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <Form onSubmit={onSubmit}>
+                <div>
+                    <label>Description:</label>
+                    <p> {bet.description} </p>
+                </div>
+                <hr />
+                <h4> Bet options: </h4>
+                <br/>
+                <Form onSubmit={(e) => onSubmit(e, betInfo)}>
                     <Tab.Container defaultActiveKey="#bet0">
                         <Form.Group>
                             <ListGroup>
                                 {bet.betOptions.map((option, index) => (
                                     <ListGroup.Item
                                         key={index}
-                                        action
-                                        href={`#bet${index}`}
+                                        active={option.id === betInfo.betOptionId}
                                         onClick={(e) => onBetOptionSelect(e, option.id)}
                                     >
                                         {option.title}
@@ -44,23 +50,25 @@ const BetForm = ({ show, onHide, onSubmit, bet, balance }) => {
                     </Tab.Container>
                     <Form.Group>
                         <Form.Control
-                            name="title"
+                            name="bet size"
                             placeholder="Enter bet size"
                             onChange={onAmountChange}
+                            type="number"
+                            max={balance}
                             required
                         />
                         <p className="mt-2 float-right">Balance: {balance}</p>
-                        {/* <p className="mt-2 text-left">Expected profit: 112</p> */}
                     </Form.Group>
+                    <Button variant="primary" type="submit">
+                        Make Bet
+                    </Button>
                 </Form>
             </Modal.Body>
             <Modal.Footer>
                 <Button variant="secondary" onClick={onHide}>
                     Close
                 </Button>
-                <Button variant="primary" type="submit" onClick={(e) => onSubmit(e, betInfo)}>
-                    Make Bet
-                </Button>
+               
             </Modal.Footer>
         </Modal>
     );

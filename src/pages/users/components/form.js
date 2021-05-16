@@ -1,6 +1,7 @@
 import { React, useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import { addUser, editUser } from "../../../api";
+import { messageHandling } from '../../../utils/messageHandling';
 
 const UserForm = ({ userData, onUsersChange, toggleModal, roles }) => {
     const [user, setUser] = useState(userData ? userData : {
@@ -21,10 +22,11 @@ const UserForm = ({ userData, onUsersChange, toggleModal, roles }) => {
         let result = null;
         if (userData) {
             result = await editUser(userData.id, user);
+            messageHandling("success", "Successfuly updated user");
         } else {
             result = await addUser(user);
+            messageHandling("success", "Successfuly added new user");
         }
-        
         toggleModal();
         onUsersChange(result.data);
     };

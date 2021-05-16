@@ -6,6 +6,7 @@ import UsersTable from "./components/table";
 import UserForm from "./components/form";
 import {getAllRoles, getUsers} from "../../api";
 import "./style.css";
+import { messageHandling } from "../../utils/messageHandling";
 
 class Users extends Component {
     state = {
@@ -40,7 +41,7 @@ class Users extends Component {
         } = this.state;
 
         return (
-            <>
+            <div>
                 <h2>Users</h2>
                 <Button onClick={this.toggleFormStatus} className="right-button">
                     Add User
@@ -64,7 +65,7 @@ class Users extends Component {
                         />
                     </Modal.Body>
                 </Modal>
-            </>
+            </div>
         )
 
     }

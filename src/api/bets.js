@@ -2,6 +2,8 @@ import axios from "../axiosConfig";
 
 const getAllBets = async () => axios.get("/bets", null);
 
+const getAllActiveBets = async () => axios.get("/bets/active");
+
 const addNewBet = async(betData) => axios.post("/bets", betData);
 
 const updateBet = async(id, betData) => axios.put(`/bets/${id}`, betData);
@@ -19,4 +21,5 @@ export {
     deleteBet,
     deleteBetOption,
     finishBet,
+    getAllActiveBets,
 };

@@ -5,6 +5,7 @@ import BetsTable from "./components/table";
 import BetForm from './components/form';
 import { getAllBets } from "../../api";
 import MainContainer from '../../components/MainContainer';
+import { messageHandling } from '../../utils/messageHandling';
 
 const Bets = () => {
     const [bets, setBets] = useState([]);
