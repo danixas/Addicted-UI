@@ -5,6 +5,7 @@ import store from "./redux/store";
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './global.scss'
+import 'react-toastify/dist/ReactToastify.css';
 
 import App from "./App";
 

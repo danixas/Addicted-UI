@@ -9,6 +9,7 @@ import CheckIcon from "@material-ui/icons/Check";
 import SearchIcon from "@material-ui/icons/Search";
 import { updateBet, deleteBetOption, finishBet, getBetOffers } from "../../../api";
 import { Edit } from '@material-ui/icons';
+import { messageHandling } from '../../../utils/messageHandling';
 
 
 const OptionsTable = ({bet, refreshBets, closeModal}) => {
@@ -28,23 +29,27 @@ const OptionsTable = ({bet, refreshBets, closeModal}) => {
         await updateBet(bet.id, {...bet, betOptions: [...options, newData]});
         const bets = await refreshBets();
         setOptions(bets.find(b=>b.id===bet.id).betOptions);
+        messageHandling("success", "Successfuly added new option");
     };
 
     const onRowUpdate = async (newData) => {
         await updateBet(bet.id, {...bet, betOptions: options.map(o=>o.id===newData.id ? newData : o) });
         const bets = await refreshBets();
         setOptions(bets.find(b=>b.id===bet.id).betOptions);
+        messageHandling("success", "Successfuly updated option");
     };
 
     const onRowDelete = async (data) => {
         await deleteBetOption(bet.id, data.id);
         const bets = await refreshBets();
         setOptions(bets.find(b=>b.id===bet.id).betOptions);
+        messageHandling("success", "Successfuly deleted option");
    };
 
     const onFinish = async (e, option) => {
         await finishBet(bet.id, option.id);
         await refreshBets();
+        messageHandling("success", "Successfuly finished bet");
         closeModal();
     };
 

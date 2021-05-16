@@ -4,8 +4,7 @@ import Banner from "./components/banner";
 import BetForm from "./components/betForm";
 import BetsTable from "./components/betsTable";
 import FuturedBet from "./components/futuredBet";
-import { getAllBets, getProfile, createOffer, getUserOffers } from "../../api";
-import axios from "../../axiosConfig";
+import { getAllActiveBets, getProfile, createOffer, getUserOffers } from "../../api";
 import "./styles.scss";
 
 const Home = () => {
@@ -24,6 +23,7 @@ const Home = () => {
         e.preventDefault();
         console.log(`betinfo on submit:`);
         console.log(betInfo);
+        e.preventDefault();
         await createOffer(betInfo);
         setShow(!show);
     };
@@ -34,13 +34,12 @@ const Home = () => {
         });
 
         getUserOffers().then(offers => {
-            console.log(offers.data);
             setActiveOffers(offers.data);
         })
     }, [show]);
 
     useEffect(() => {
-        getAllBets().then((bets) => {
+        getAllActiveBets().then((bets) => {
             console.log(bets.data);
             setBets(bets.data);
         });

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import { useHistory } from "react-router";
 import axios from "../../axiosConfig";
+import { messageHandling } from "../../utils/messageHandling";
 
 const Login = () => {
     const history = useHistory();
@@ -10,14 +11,13 @@ const Login = () => {
 
     const onFormSubmit = async (e) => {
         e.preventDefault();
-        try {
-            setErrors({})
-            const role = await axios.post("authenticate/login", user, { withCredentials: true });
-            localStorage.setItem("role", role.data.roleName);
-            history.push("");
-        } catch (e) {
-            setErrors({ ...errors, password: "Invalid password" });
+        const role = await axios.post("authenticate/login", user, { withCredentials: true });
+        if (role.isError) {
+            messageHandling("error", role.data);
+            return;
         }
+        localStorage.setItem("role", role.data.roleName);
+        history.push("");  
     };
 
     const updateUser = (e) => {

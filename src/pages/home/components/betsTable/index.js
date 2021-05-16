@@ -180,7 +180,7 @@ export default function BetsTable({onClick, items}) {
                                             >
                                                 {row.title}
                                             </TableCell>
-                                            <TableCell>{row.date}</TableCell>
+                                            <TableCell>{row.date?.split("T")[0]}</TableCell>
                                             <TableCell>{row.author}</TableCell>
                                         </TableRow>
                                     );
