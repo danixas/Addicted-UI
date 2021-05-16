@@ -57,14 +57,14 @@ const OptionsTable = ({bet, refreshBets, closeModal}) => {
         const columns = [
             { title: "Title", field: "title" },
         ];
-        if (bet.isFinished) {
+        if (bet?.isFinished) {
             columns.push({ title: "Money in pool", field: "moneySum"});
         }
         return columns;
     };
     
     const getRowColor = (row) => {
-        if (!bet.isFinished) {
+        if (!bet?.isFinished) {
             return "";
         }
        return row.isWinner ? "#E9FCD4" : "#F44949";
@@ -107,7 +107,7 @@ const OptionsTable = ({bet, refreshBets, closeModal}) => {
                         moneySum: offers?.reduce((acc, offer) => offer.betOptionId === o.id ? acc + offer.amount : acc, 0),
                     }))
                 }
-                icons={!bet.isFinished &&  {
+                icons={!bet?.isFinished &&  {
                     Add: props => <AddIcon />,
                     Edit: props => <EditIcon />,
                     Delete: props => <DeleteIcon />,
@@ -116,14 +116,14 @@ const OptionsTable = ({bet, refreshBets, closeModal}) => {
                     Search: props => <SearchIcon />,
                     ResetSearch: props => <DeleteIcon />,
                   }}
-                editable={!bet.isFinished && 
+                editable={!bet?.isFinished && 
                     {
                         onRowAdd: onRowAdd,
                         onRowUpdate: onRowUpdate,
                         onRowDelete: onRowDelete,
                     }
                 }
-                actions={!bet.isFinished && [
+                actions={!bet?.isFinished && [
                     {
                         icon: 'my_location',
                         tooltip: 'finish bet',
@@ -136,7 +136,7 @@ const OptionsTable = ({bet, refreshBets, closeModal}) => {
                     }),
                 }}   
             />
-            {bet.isFinished && renderStatistic()}
+            {bet?.isFinished && renderStatistic()}
         </>
         
         
