@@ -1,5 +1,5 @@
 import { React, useEffect, useState } from "react";
-import { Container, Row, Col, Card } from "react-bootstrap";
+import { Container, Row, Col, Card, Image } from "react-bootstrap";
 import axios from "../../axiosConfig";
 import Banner from "../home/components/banner";
 import "../home/components/banner/styles.scss";
@@ -23,10 +23,10 @@ const Profile = () => {
             name: result.data.name,
             surname: result.data.surname,
             coins: result.data.coins.vaciusCoin,
-            betsWon: 0,
-            betsLost: 0,
-            totalWon: 0,
-            totalLoss: 0
+            betsWon: Math.floor(Math.random() * 10),
+            betsLost: Math.floor(Math.random() * 10),
+            totalWon: Math.floor(Math.random() * 500) + 100,
+            totalLoss: Math.floor(Math.random() * 500) + 100
         } : user)
     };
 
@@ -35,9 +35,18 @@ const Profile = () => {
 
     return (
         <div className="profile__page">
-            <div className="name">
-                {user.name} {user.surname}
+            <div className="flex-container">
+                <img className="flex-profile profile" src="/img/profile2.png" />
+                <div className="flex-profile">
+                    <div className=" profile-summary first">
+                        {user.name} {user.surname}
+                    </div>
+                    <div className="profile-summary second">
+                        Investor at KTU addicted 🚀 
+                    </div>
+                </div>
             </div>
+            <hr/>
             <div className="flex">
                 <Card className="flex-child card">
                     <Card.Body>
@@ -62,10 +71,10 @@ const Profile = () => {
                             Bets lost: {user.betsLost}
                         </Card.Text>
                         <Card.Text className="card-text">
-                            Total winnings: {user.totalWon}
+                            Total coins won: {user.totalWon}
                         </Card.Text>
                         <Card.Text className="card-text">
-                            Total loss: {user.totalLoss}
+                            Total coins lost: {user.totalLoss}
                         </Card.Text>
                     </Card.Body>
                 </Card>
