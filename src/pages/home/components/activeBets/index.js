@@ -7,12 +7,12 @@ import "./styles.scss";
 const ActiveBets = ({ title, offers, ...props }) => {
 
     const drawTable = () => {
-        if (offers.length == 0) {
+        if (offers?.length == 0) {
             return <h5> No active bets.</h5> 
         }
         return (
             <>
-                {offers.map((offer, i) => (
+                {offers?.map((offer, i) => (
                     <ListGroup.Item key={i}>
                         <p className="mb-0">{offer.bet.title}</p>
                         <span className="bet_info">Bet amount: {offer.amount}</span>

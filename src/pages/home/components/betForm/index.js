@@ -30,7 +30,7 @@ const BetForm = ({ show, onHide, onSubmit, bet, balance }) => {
             <Modal.Body>
                 <div>
                     <label>Description:</label>
-                    <p> {bet.description} </p>
+                    <p> {bet?.description} </p>
                 </div>
                 <hr />
                 <h4> Bet options: </h4>
@@ -39,7 +39,7 @@ const BetForm = ({ show, onHide, onSubmit, bet, balance }) => {
                     <Tab.Container defaultActiveKey="#bet0">
                         <Form.Group>
                             <ListGroup>
-                                {bet.betOptions.map((option, index) => (
+                                {bet?.betOptions?.map((option, index) => (
                                     <ListGroup.Item
                                         key={index}
                                         active={option.id === betInfo.betOptionId}

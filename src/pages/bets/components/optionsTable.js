@@ -10,7 +10,7 @@ import SearchIcon from "@material-ui/icons/Search";
 import { updateBet, deleteBetOption, finishBet, getBetOffers } from "../../../api";
 import { Edit } from '@material-ui/icons';
 import { messageHandling } from '../../../utils/messageHandling';
-
+import {BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts'
 
 const OptionsTable = ({bet, refreshBets, closeModal}) => {
     const [options, setOptions] = useState(null);
@@ -59,6 +59,7 @@ const OptionsTable = ({bet, refreshBets, closeModal}) => {
         ];
         if (bet?.isFinished) {
             columns.push({ title: "Money in pool", field: "moneySum"});
+            columns.push({ title: "Users count", field: "totalUsers"});
         }
         return columns;
     };
@@ -71,8 +72,30 @@ const OptionsTable = ({bet, refreshBets, closeModal}) => {
     };
 
     const getWinnerList = () => {
-        return Object.values(offers?.reduce((acc, offer) => ({...acc, [offer.user.id]: offer.user}), {}) ?? {});
+        return Object
+                .values(
+                    offers
+                        ?.reduce(
+                            (acc, offer) => ({
+                                ...acc, 
+                                [offer?.user?.id]: offer?.user,
+                            }), {}) ?? {});
     };
+
+    const getOptionsStatistic = () => {
+        return Object
+                .values(
+                    offers
+                        ?.reduce((acc, offer) => 
+                            ({
+                                ...acc, 
+                                [offer.betOptionId]: {
+                                    title: offer?.bet?.title,
+                                    sum: (acc[offer.betOptionId]?.sum ?? 0) + offer.amount,
+                                }
+                            }), {}) ?? {});
+    };
+
     const renderStatistic = () => {
         return (
             <>
@@ -90,6 +113,20 @@ const OptionsTable = ({bet, refreshBets, closeModal}) => {
                          {getWinnerList().map((user) => (<li> {`${user.name} ${user.surname}`}</li>))}
                     </ul>
                 </div>
+                <hr />
+                <div>
+                    <ResponsiveContainer width ="90%" height={300}>
+                        <BarChart
+                            data={getOptionsStatistic()}
+                        >
+                            <CartesianGrid strokeDasharray="3 3" />
+                            <XAxis dataKey="title" />
+                            <YAxis />
+                            <Tooltip />
+                            <Bar dataKey="sum" fill="#82ca9d" />
+                        </BarChart>
+                    </ResponsiveContainer>
+                </div>
             </>
         )
     }
@@ -105,6 +142,10 @@ const OptionsTable = ({bet, refreshBets, closeModal}) => {
                     {
                         ...o, 
                         moneySum: offers?.reduce((acc, offer) => offer.betOptionId === o.id ? acc + offer.amount : acc, 0),
+                        totalUsers: Object.keys(
+                                        offers
+                                            ?.reduce((acc, offer) => offer.betOptionId === o.id ? {...acc, [offer?.user?.id]: true} : acc, {})
+                                    ?? {}).length,
                     }))
                 }
                 icons={!bet?.isFinished &&  {
